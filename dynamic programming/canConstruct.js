@@ -27,3 +27,5 @@ module.exports = canConstruct;
 
 //BRUTE
 //time O(m^n * n), space O(m^2)
+//MEMO
+//time O()
