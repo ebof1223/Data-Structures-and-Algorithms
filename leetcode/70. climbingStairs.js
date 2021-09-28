@@ -4,6 +4,7 @@ const climbStairs = (n, node = 0, memo = {}) => {
   if (n === node) {
     return 1;
   }
+
   if (n < node) {
     return 0;
   }
@@ -18,4 +19,6 @@ const climbStairs = (n, node = 0, memo = {}) => {
   return ways;
 };
 
-climbStairs(1);
+climbStairs(5);
+
+

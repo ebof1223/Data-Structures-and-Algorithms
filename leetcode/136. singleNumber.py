@@ -9,3 +9,4 @@ def singleNumber(nums):
 
 
 print(singleNumber([4, 1, 2, 1, 2]))
+
