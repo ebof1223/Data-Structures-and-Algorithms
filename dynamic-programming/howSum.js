@@ -1,6 +1,9 @@
 //7, [5,3,4,7] => [7], [3,4]
 
-const howSum = (targetSum, numbers) => {
+const howSum = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) {
+    return memo[targetSum];
+  }
   if (targetSum === 0) {
     return [];
   }
@@ -8,19 +11,20 @@ const howSum = (targetSum, numbers) => {
   if (targetSum < 0) {
     return null;
   }
-  var combinations = new Array();
 
   for (const num of numbers) {
     const remainder = targetSum - num;
 
-    const remainderResult = howSum(remainder, numbers);
+    const remainderResult = howSum(remainder, numbers, memo);
+
+    memo[num] = remainderResult;
 
     if (remainderResult) {
-      combinations = [...remainderResult, num];
+      return [...remainderResult, num];
     }
   }
 
-  return combinations;
+  return null;
 };
 
-howSum(8, [2, 3, 5]);
+howSum(301, [7, 14]);
