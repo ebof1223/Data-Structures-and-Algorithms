@@ -1,4 +1,8 @@
-const bestSum = (targetSum, numbers) => {
+const bestSum = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) {
+    return memo[targetSum];
+  }
+
   if (targetSum < 0) {
     return null;
   }
@@ -11,7 +15,9 @@ const bestSum = (targetSum, numbers) => {
   for (const num of numbers) {
     const remainder = targetSum - num;
 
-    const remainderResult = bestSum(remainder, numbers);
+    const remainderResult = bestSum(remainder, numbers, memo);
+
+    memo[remainder] = remainderResult;
 
     if (remainderResult) {
       const tempArray = [...remainderResult, num];
@@ -25,4 +31,4 @@ const bestSum = (targetSum, numbers) => {
   return resultArray;
 };
 
-bestSum(4, [3, 3]);
+bestSum(100, [5, 3]);

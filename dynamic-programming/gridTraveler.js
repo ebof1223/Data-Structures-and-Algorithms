@@ -1,7 +1,7 @@
 // (3,3)
 
 const gridTraveler = (length, width, memo = {}) => {
-  const coordinate = `${length},${width}`;
+  const coordinate = length + ',' + width;
 
   if (coordinate in memo) {
     return memo[coordinate];
@@ -21,9 +21,9 @@ const gridTraveler = (length, width, memo = {}) => {
 
   const moveRight = gridTraveler(length, width - 1, memo);
 
-  totalWays += moveRight + moveDown;
+  memo[coordinate] = moveRight + moveDown;
 
-  return totalWays;
+  return memo[coordinate];
 };
 
-gridTraveler(3, 3);
+gridTraveler(18, 18);
