@@ -1,5 +1,3 @@
-// (3,3)
-
 // const gridTraveler = (length, width, memo = {}) => {
 //   const coordinate = length + ',' + width;
 
@@ -26,10 +24,31 @@
 //   return memo[coordinate];
 // };
 
-const gridTraveler = (n, m) => {};
+const gridTraveler = (n, m) => {
+  const table = Array(n + 1)
+    .fill()
+    .map(() => Array(m + 1).fill(0));
 
-//[0,0,0]
-//[0,0,0]
-//[0,0,0]
+  table[1][1] = 1;
 
-gridTraveler(3, 2);
+  for (let i = 0; i <= n; i++) {
+    for (let j = 0; j <= m; j++) {
+      const current = table[i][j];
+      if (j + 1 <= m) {
+        table[i][j + 1] += current;
+      }
+      if (i + 1 <= n) {
+        table[i + 1][j] += current;
+      }
+    }
+  }
+  return table[n][m];
+};
+
+//  c
+//r[0,0,0]
+// [0,1,0]
+// [0,0,0]
+// [0,0,0]
+
+gridTraveler(18, 18);
