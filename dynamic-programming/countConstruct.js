@@ -21,7 +21,6 @@
 //   return totalWays;
 // };
 
-
 const countConstruct = (target, wordBank) => {
   var table = Array(target.length + 1).fill(0);
   table[0] = 1;
@@ -32,14 +31,14 @@ const countConstruct = (target, wordBank) => {
         const wordLen = word.length;
         const prefix = target.slice(i, i + wordLen);
         if (prefix === word) {
-          table[i + wordLen] += 1;
+          table[i + wordLen] += table[i];
         }
       }
     }
   }
   return table[target.length];
 };
-countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']);
+// countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']);
 countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
   'f',
   'a',
