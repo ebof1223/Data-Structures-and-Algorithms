@@ -1,5 +1,7 @@
 const combinations = (array) => {
-  if (array.length === 0) return [[]];
+  if (array.length === 0) {
+    return [[]];
+  }
 
   const firstEl = array[0];
   const rest = array.slice(1);
