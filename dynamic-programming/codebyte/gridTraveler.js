@@ -51,4 +51,4 @@ const gridTraveler = (n, m) => {
 // [0,0,0]
 // [0,0,0]
 
-gridTraveler(18, 18);
+gridTraveler(3, 3);
