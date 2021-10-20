@@ -1,39 +1,32 @@
 //even - odd
 
-//brute
-
-// const maxAlternatingSum = (nums ) => {
-//   if (nums.length === 0) {
-//     return [];
-//   }
-//   var maxSub = [];
-//   for (const [idx, num] of nums.entries()) {
-//     let numsCopy = [...nums];
-// numsCopy.splice(idx, 1);
-// const subseqWithoutNum = maxAlternatingSum(numsCopy);
-// const subseqWithNum = [...subseqWithoutNum, num];
-// const subseqWithNumSum = subseqWithNum.reduce(
-//   (prev, acc, idx) => (idx % 2 === 0 ? prev + acc : prev - acc),
-//   0
-// );
-// if (max.maxSum < subseqWithNumSum) {
-//   max.maxSum = subseqWithNumSum;
-//   maxSubseq = [...subseqWithNum];
-// }
-// }
-// return maxSubseq;
-// };
-
+//BRUTE T:O(m^m), S: O(m^2)
+//MEMO T:O(m^3)? S: O(m^3)
 const maxAlternatingSum = (nums) => {
-  var table = Array(nums.length).fill();
-  table[0] = nums[0];
-
-  for (let i = 1; i < nums.length; i++) {
-    const subseq = nums
-      .slice(0, i)
-      .reduce((prev, curr, idx) => (idx % 2 === 0 ? prev + curr : prev - curr));
-    table[i] = Math.max(nums[i], table[i - 1], subseq);
-  }
-  return table[nums.length - 1];
+  return maxAlternatingSumHelper(
+    nums,
+    (maxSum = nums.reduce(
+      (prev, curr, idx) => (idx % 2 === 0 ? prev + curr : prev - curr),
+      0
+    )),
+    (memo = {})
+  );
 };
-maxAlternatingSum([6, 2, 1, 2, 4, 5]);
+
+const maxAlternatingSumHelper = function (nums) {
+  if (JSON.stringify(nums) in memo) {
+    return memo[JSON.stringify(nums)];
+  }
+  for (const [idx] of nums.entries()) {
+    var copy = [...nums];
+    copy.splice(idx, 1);
+    memo[JSON.stringify(nums)] = copy.reduce(
+      (prev, curr, idx) => (idx % 2 === 0 ? prev + curr : prev - curr),
+      0
+    );
+    maxSum = Math.max(maxSum, memo[JSON.stringify(nums)]);
+    maxAlternatingSumHelper(copy, maxSum, memo);
+  }
+  return maxSum;
+};
+maxAlternatingSum([5,6,7,8]);
